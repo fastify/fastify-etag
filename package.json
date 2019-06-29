@@ -1,0 +1,35 @@
+{
+  "name": "fastify-auto-etag",
+  "version": "0.0.1",
+  "description": "Automatically generate etags for HTTP responses, for Fastify",
+  "main": "index.js",
+  "scripts": {
+    "test": "standard | snazzy && tap --no-esm test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fastify/fastify-auto-etag.git"
+  },
+  "keywords": [
+    "fastify",
+    "etag",
+    "generate",
+    "caching",
+    "http"
+  ],
+  "author": "Matteo Collina <hello@matteocollina.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fastify/fastify-auto-etag/issues"
+  },
+  "homepage": "https://github.com/fastify/fastify-auto-etag#readme",
+  "devDependencies": {
+    "fastify": "^2.6.0",
+    "snazzy": "^8.0.0",
+    "standard": "^12.0.1",
+    "tap": "^14.3.1"
+  },
+  "dependencies": {
+    "fastify-plugin": "^1.6.0"
+  }
+}
