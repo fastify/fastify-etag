@@ -4,7 +4,7 @@
   "description": "Automatically generate etags for HTTP responses, for Fastify",
   "main": "index.js",
   "scripts": {
-    "test": "standard | snazzy && tap --no-esm test.js"
+    "test": "standard | snazzy && tap -J --no-esm test/*.test.js"
   },
   "repository": {
     "type": "git",
