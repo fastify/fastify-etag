@@ -1,5 +1,5 @@
 {
-  "name": "fastify-auto-etag",
+  "name": "fastify-etag",
   "version": "0.1.0",
   "description": "Automatically generate etags for HTTP responses, for Fastify",
   "main": "index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fastify/fastify-auto-etag.git"
+    "url": "git+https://github.com/fastify/fastify-etag.git"
   },
   "keywords": [
     "fastify",
@@ -20,9 +20,9 @@
   "author": "Matteo Collina <hello@matteocollina.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/fastify/fastify-auto-etag/issues"
+    "url": "https://github.com/fastify/fastify-etag/issues"
   },
-  "homepage": "https://github.com/fastify/fastify-auto-etag#readme",
+  "homepage": "https://github.com/fastify/fastify-etag#readme",
   "devDependencies": {
     "fastify": "^2.6.0",
     "snazzy": "^8.0.0",
