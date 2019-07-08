@@ -32,7 +32,7 @@ module.exports = fp(async function etag (app, opts) {
 
     if (req.headers['if-none-match'] === etag) {
       reply.code(304)
-      return null;
+      return null
     }
   })
 }, {
