@@ -26,6 +26,13 @@ app.get('/', async (req, reply) => {
   return { hello: 'world' }
 })
 
+app.get('/manual-etag', async (req, reply) => {
+  // This will disable automatic ETag generation
+  // It will still return a 304 if the ETag matches
+  reply.header('etag', '"foobar"')
+  return 'world'
+})
+
 app.listen(3000)
 ```
 

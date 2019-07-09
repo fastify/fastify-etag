@@ -14,7 +14,7 @@ module.exports = function ({ test }, etagOpts, hashFn) {
     })
 
     app.get('/etag', async (req, reply) => {
-      reply.header('etag', 'foobar')
+      reply.header('etag', '"foobar"')
       return 'world'
     })
 
@@ -61,7 +61,7 @@ module.exports = function ({ test }, etagOpts, hashFn) {
 
     t.is(res.statusCode, 200)
     t.match(res.headers, {
-      'etag': 'foobar'
+      'etag': '"foobar"'
     })
   })
 
@@ -78,7 +78,7 @@ module.exports = function ({ test }, etagOpts, hashFn) {
     const res = await build().inject({
       url: '/etag',
       headers: {
-        'If-None-Match': 'foobar'
+        'If-None-Match': '"foobar"'
       }
     })
 
@@ -86,7 +86,7 @@ module.exports = function ({ test }, etagOpts, hashFn) {
     t.is(res.body, '')
     t.match(res.headers, {
       'content-length': '0',
-      'etag': 'foobar'
+      'etag': '"foobar"'
     })
   })
 }
