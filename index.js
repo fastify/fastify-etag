@@ -2,11 +2,19 @@
 
 const fp = require('fastify-plugin')
 const { createHash } = require('crypto')
+const { xxHash32 } = require('js-xxhash')
 const fnv1a = require('./fnv1a')
 
 function buildHashFn (algorithm = 'fnv1a') {
   if (algorithm === 'fnv1a') {
     return (payload) => '"' + fnv1a(payload).toString(36) + '"'
+  }
+
+  if (algorithm === 'xxhash') {
+    return (payload) => {
+      const bufferPayload = payload instanceof Buffer ? payload : Buffer.from(payload, 'utf8')
+      return '"' + xxHash32(bufferPayload, 0).toString(16) + '"'
+    }
   }
 
   return (payload) => '"' + createHash(algorithm)

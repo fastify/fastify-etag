@@ -30,6 +30,7 @@
     "tap": "^14.3.1"
   },
   "dependencies": {
-    "fastify-plugin": "^1.6.0"
+    "fastify-plugin": "^1.6.0",
+    "js-xxhash": "^1.0.1"
   }
 }

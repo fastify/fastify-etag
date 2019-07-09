@@ -4,6 +4,8 @@ const Fastify = require('fastify')
 const Etag = require('..')
 const { createReadStream } = require('fs')
 
+const sampleBuffer = Buffer.from('48656c6c6f2046617374696679', 'hex')
+
 module.exports = function ({ test }, etagOpts, hashFn) {
   function build (opts = {}) {
     const app = Fastify()
@@ -11,6 +13,10 @@ module.exports = function ({ test }, etagOpts, hashFn) {
 
     app.get('/', async (req, reply) => {
       return { hello: 'world' }
+    })
+
+    app.get('/buffer', async (req, reply) => {
+      return sampleBuffer
     })
 
     app.get('/etag', async (req, reply) => {
@@ -26,6 +32,7 @@ module.exports = function ({ test }, etagOpts, hashFn) {
   }
 
   const hash = hashFn(JSON.stringify({ hello: 'world' }))
+  const hashBuffer = hashFn(sampleBuffer)
 
   test('returns an etag for each request', async (t) => {
     const res = await build().inject({
@@ -35,6 +42,17 @@ module.exports = function ({ test }, etagOpts, hashFn) {
     t.same(JSON.parse(res.body), { hello: 'world' })
     t.match(res.headers, {
       'etag': hash
+    })
+  })
+
+  test('returns an etag for each request where the payload is a buffer', async (t) => {
+    const res = await build().inject({
+      url: '/buffer'
+    })
+
+    t.same(res.body, 'Hello Fastify')
+    t.match(res.headers, {
+      'etag': hashBuffer
     })
   })
 

@@ -2,6 +2,7 @@
 
 const { test } = require('tap')
 const { createHash } = require('crypto')
+const { xxHash32 } = require('js-xxhash')
 const generic = require('./generic')
 const fnv1a = require('../fnv1a')
 
@@ -26,6 +27,14 @@ test('weak fnv1a', async (t) => {
     algorithm: 'fnv1a'
   }, (body) => {
     return '"' + fnv1a(body).toString(36) + '"'
+  })
+})
+
+test('xxhash', async (t) => {
+  generic(t, {
+    algorithm: 'xxhash'
+  }, (body) => {
+    return '"' + xxHash32(Buffer.from(body)).toString(16) + '"'
   })
 })
 
