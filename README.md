@@ -43,10 +43,10 @@ app.listen(3000)
 
 ## Acknowledgements
 
-The fnv1a logic was forked from https://github.com/sindresorhus/fnv1a
+The fnv1a logic was forked from [sindresorhus/fnv1a](https://github.com/sindresorhus/fnv1a)
 and adapted to support buffers.
 
-The xxHash32 algorithm is implemented in pure JavaScript and it's coming through a module written by Jason3S: https://github.com/Jason3S/xxhash.
+The xxHash32 algorithm is implemented in pure JavaScript and it's coming through a module written by Jason3S: [Jason3S/xxhash](https://github.com/Jason3S/xxhash).
 
 ## Benchmarks
 
