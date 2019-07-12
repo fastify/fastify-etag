@@ -2,7 +2,7 @@
 
 const fp = require('fastify-plugin')
 const { createHash } = require('crypto')
-const { xxHash32 } = require('js-xxhash')
+const { xxHash32 } = require('./xxhash')
 const fnv1a = require('./fnv1a')
 
 function buildHashFn (algorithm = 'fnv1a') {

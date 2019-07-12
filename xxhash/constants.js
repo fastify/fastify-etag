@@ -1,0 +1,15 @@
+'use strict'
+
+const PRIME32_1 = 2654435761
+const PRIME32_2 = 2246822519
+const PRIME32_3 = 3266489917
+const PRIME32_4 = 668265263
+const PRIME32_5 = 374761393
+
+module.exports = {
+  PRIME32_1,
+  PRIME32_2,
+  PRIME32_3,
+  PRIME32_4,
+  PRIME32_5
+}

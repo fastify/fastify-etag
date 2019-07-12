@@ -2,7 +2,7 @@
 
 const { test } = require('tap')
 const { createHash } = require('crypto')
-const { xxHash32 } = require('js-xxhash')
+const { xxHash32 } = require('../xxhash')
 const generic = require('./generic')
 const fnv1a = require('../fnv1a')
 
