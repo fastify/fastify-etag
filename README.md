@@ -11,7 +11,7 @@ A plugin for
 npm i fastify-etag
 ```
 
-## Exmaple
+## Example
 
 ```js
 'use strict'
