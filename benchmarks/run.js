@@ -42,7 +42,7 @@ const shoot = (port) => new Promise((resolve) => {
   autocannon.track(currentBenchmark, { renderResultsTable: false })
 })
 
-async function run() {
+async function run () {
   const results = {}
   let port = 3000
 

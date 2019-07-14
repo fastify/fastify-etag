@@ -1,6 +1,6 @@
 'use strict'
 
-module.exports = function printReport(results) {
+module.exports = function printReport (results) {
   for (let group of Object.keys(results)) {
     console.log(`\n${group}\n${'-'.repeat(group.length)}\n`)
     for (let subgroup of Object.keys(results[group])) {

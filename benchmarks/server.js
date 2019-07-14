@@ -20,7 +20,7 @@ if (contentFormat === 'buffer') {
   content = Buffer.from(content)
 }
 
-async function run() {
+async function run () {
   const app = Fastify()
 
   if (algorithm) {
