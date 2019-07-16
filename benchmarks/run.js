@@ -33,8 +33,8 @@ const shoot = (port) => new Promise((resolve) => {
   const opts = {
     url: `http://localhost:${port}/`,
     connections: 100,
-    pipelining: 10,
-    duration: 40
+    pipelining: 4,
+    duration: 30
   }
 
   currentBenchmark = autocannon(opts)
