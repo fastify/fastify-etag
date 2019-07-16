@@ -52,7 +52,7 @@ function fnv1aBuffer (buf) {
 }
 
 function fnv1a (input) {
-  if (input instanceof Buffer) {
+  if (Buffer.isBuffer(input)) {
     return fnv1aBuffer(input)
   } else if (typeof input === 'string') {
     return fnv1aString(input)

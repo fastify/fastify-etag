@@ -11,7 +11,7 @@ const xxHash32String = require('./xxhash32string')
  * @return {Number}                 The hash value
  */
 function xxHash32 (input, seed = 0) {
-  if (input instanceof Buffer) {
+  if (Buffer.isBuffer(input)) {
     return xxHash32Buffer(input, seed)
   } else if (typeof input === 'string') {
     return xxHash32String(input, seed)
