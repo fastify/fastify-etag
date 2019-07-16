@@ -12,7 +12,7 @@ module.exports = function printReport (results) {
 
       let i = 0
       for (let b of sorted) {
-        console.log(`  ${++i}. ${b.name}\t${b.results.requests.mean} req/sec${b.results.errors ? `(${b.results.errors} errors - ${b.results.timeouts})`}`)
+        console.log(`  ${++i}. ${b.name}\t${b.results.requests.mean} req/sec${b.results.errors ? ` (${b.results.errors} errors - ${b.results.timeouts})` : ''}`)
       }
       console.log()
     }
