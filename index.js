@@ -11,10 +11,7 @@ function buildHashFn (algorithm = 'fnv1a') {
   }
 
   if (algorithm === 'xxhash') {
-    return (payload) => {
-      const bufferPayload = payload instanceof Buffer ? payload : Buffer.from(payload, 'utf8')
-      return '"' + xxHash32(bufferPayload, 0).toString(16) + '"'
-    }
+    return (payload) => '"' + xxHash32(payload, 0).toString(16) + '"'
   }
 
   return (payload) => '"' + createHash(algorithm)
