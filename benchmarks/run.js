@@ -21,7 +21,8 @@ const startServerFor = (test, port) => {
     [],
     {
       env,
-      stdio: [ 'ignore', 'ignore', 'ignore' ]
+      stdio: [ 'ignore', 'ignore', 'ignore' ],
+      shell: true
     }
   )
 
