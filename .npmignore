@@ -62,3 +62,7 @@ typings/
 
 package-lock.json
 .bench*
+
+benchmarks/
+test/
+example.js

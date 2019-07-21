@@ -4,7 +4,8 @@
   "description": "Automatically generate etags for HTTP responses, for Fastify",
   "main": "index.js",
   "scripts": {
-    "test": "standard | snazzy && tap -J --no-esm test/*.test.js"
+    "test": "standard | snazzy && tap -J --no-esm test/*.test.js",
+    "bench": "node benchmarks/run.js"
   },
   "repository": {
     "type": "git",
@@ -24,6 +25,7 @@
   },
   "homepage": "https://github.com/fastify/fastify-etag#readme",
   "devDependencies": {
+    "autocannon": "^4.0.0",
     "fastify": "^2.6.0",
     "snazzy": "^8.0.0",
     "standard": "^12.0.1",
