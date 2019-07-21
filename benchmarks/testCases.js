@@ -34,7 +34,7 @@ const testCases = [
   { name: 'md5', group: '2 kb', subgroup: 'string', options: { ALGORITHM: 'md5', CONTENT_FORMAT: 'string', CONTENT_SIZE: kb(2) } },
   { name: 'md5', group: '2 kb', subgroup: 'buffer', options: { ALGORITHM: 'md5', CONTENT_FORMAT: 'buffer', CONTENT_SIZE: kb(2) } },
   { name: 'md5', group: '2 Mb', subgroup: 'string', options: { ALGORITHM: 'md5', CONTENT_FORMAT: 'string', CONTENT_SIZE: mb(2) } },
-  { name: 'md5', group: '2 Mb', subgroup: 'buffer', options: { ALGORITHM: 'md5', CONTENT_FORMAT: 'buffer', CONTENT_SIZE: mb(2) } }
+  { name: 'md5', group: '2 Mb', subgroup: 'buffer', options: { ALGORITHM: 'md5', CONTENT_FORMAT: 'buffer', CONTENT_SIZE: mb(2) } },
 
   // sha1
   { name: 'sha1', group: '32 bytes', subgroup: 'string', options: { ALGORITHM: 'sha1', CONTENT_FORMAT: 'string', CONTENT_SIZE: 32 } },
