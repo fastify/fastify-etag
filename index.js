@@ -16,13 +16,15 @@ function buildHashFn (algorithm = 'fnv1a') {
 module.exports = fp(async function etag (app, opts) {
   const hash = buildHashFn(opts.algorithm)
 
-  app.addHook('onSend', async function (req, reply, payload) {
+  app.addHook('onSend', function (req, reply, payload, done) {
     let etag = reply.getHeader('etag')
+    let newPayload
 
     // we do not generate with an already existing etag
     if (!etag) {
       // we do not generate etags for anything but strings and buffers
       if (!(typeof payload === 'string' || payload instanceof Buffer)) {
+        done(null, newPayload)
         return
       }
 
@@ -32,8 +34,9 @@ module.exports = fp(async function etag (app, opts) {
 
     if (req.headers['if-none-match'] === etag) {
       reply.code(304)
-      return ''
+      newPayload = ''
     }
+    done(null, newPayload)
   })
 }, {
   fastify: '2.x',
