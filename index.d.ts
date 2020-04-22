@@ -1,17 +1,15 @@
 import { Plugin } from 'fastify';
 import { Server, IncomingMessage, ServerResponse } from 'http';
 
+interface FastifyEtagOptions {
+  algorithm: 'fnv1a' | string;
+}
+
 const fastifyEtag: Plugin<
   Server,
   IncomingMessage,
   ServerResponse,
-  fastifyEtag.FastifyEtagOptions
+  FastifyEtagOptions
 >;
-
-namespace fastifyEtag {
-  interface FastifyEtagOptions {
-    algorithm: string;
-  }
-}
 
 export = fastifyEtag;
