@@ -1,5 +1,5 @@
-import * as fastify from "fastify";
-import * as fastifyEtag from "../../";
+import fastify from "fastify";
+import fastifyEtag from "..";
 
 const app = fastify();
 
