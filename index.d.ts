@@ -1,15 +1,10 @@
-import { Plugin } from 'fastify';
+import { FastifyPlugin } from 'fastify'
 import { Server, IncomingMessage, ServerResponse } from 'http';
 
-interface FastifyEtagOptions {
+export interface FastifyEtagOptions {
   algorithm?: 'fnv1a' | string;
 }
 
-declare const fastifyEtag: Plugin<
-  Server,
-  IncomingMessage,
-  ServerResponse,
-  FastifyEtagOptions
->;
+declare const fastifyEtag: FastifyPlugin<FastifyEtagOptions>
 
-export = fastifyEtag;
+export default fastifyEtag;
