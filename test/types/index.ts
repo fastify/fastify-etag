@@ -1,9 +1,15 @@
 import fastify from "fastify";
-import fastifyEtag from "../../";
+import fastifyEtag, { FastifyEtagOptions } from "../../";
 
 const app = fastify();
 
 app.register(fastifyEtag);
-app.register(fastifyEtag, {});
-app.register(fastifyEtag, { algorithm: "fnv1a" });
-app.register(fastifyEtag, { algorithm: "sha256" });
+
+const emptyOpts: FastifyEtagOptions = {}
+app.register(fastifyEtag, emptyOpts);
+
+const fnv1aOpts: FastifyEtagOptions = { algorithm: "fnv1a" }
+app.register(fastifyEtag, fnv1aOpts);
+
+const stringOpts: FastifyEtagOptions = { algorithm: "sha256" }
+app.register(fastifyEtag, stringOpts);
