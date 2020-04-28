@@ -27,7 +27,7 @@ const startServerFor = (test, port) => {
     [],
     {
       env,
-      stdio: [ 'ignore', logs, errors ],
+      stdio: ['ignore', logs, errors],
       shell: true
     }
   )
@@ -54,7 +54,7 @@ async function run () {
   const results = {}
   let port = 3000
 
-  for (let test of testCases) {
+  for (const test of testCases) {
     port++
     console.log(`🚗 ${test.name} (${test.group}, ${test.subgroup}) 🚗`)
 
@@ -98,9 +98,9 @@ async function run () {
 }
 
 function printReport (results) {
-  for (let group of Object.keys(results)) {
+  for (const group of Object.keys(results)) {
     console.log(`\n${group}\n${'-'.repeat(group.length)}\n`)
-    for (let subgroup of Object.keys(results[group])) {
+    for (const subgroup of Object.keys(results[group])) {
       console.log(`  ${subgroup}\n  ${'-'.repeat(subgroup.length)}`)
 
       // sort the results by mean of req/sec
@@ -115,7 +115,7 @@ function printReport (results) {
       let pos = ''
       let reqSec = ''
 
-      for (let b of sorted) {
+      for (const b of sorted) {
         if (i === 0) {
           best = b.results.requests.mean
           diff = ''

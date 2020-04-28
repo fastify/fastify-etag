@@ -34,7 +34,7 @@ module.exports = function ({ test }, etagOpts, hashFn) {
 
     t.same(JSON.parse(res.body), { hello: 'world' })
     t.match(res.headers, {
-      'etag': hash
+      etag: hash
     })
   })
 
@@ -50,7 +50,7 @@ module.exports = function ({ test }, etagOpts, hashFn) {
     t.is(res.body, '')
     t.match(res.headers, {
       'content-length': '0',
-      'etag': hash
+      etag: hash
     })
   })
 
@@ -61,7 +61,7 @@ module.exports = function ({ test }, etagOpts, hashFn) {
 
     t.is(res.statusCode, 200)
     t.match(res.headers, {
-      'etag': '"foobar"'
+      etag: '"foobar"'
     })
   })
 
@@ -86,7 +86,7 @@ module.exports = function ({ test }, etagOpts, hashFn) {
     t.is(res.body, '')
     t.match(res.headers, {
       'content-length': '0',
-      'etag': '"foobar"'
+      etag: '"foobar"'
     })
   })
 }
