@@ -27,7 +27,7 @@
   "homepage": "https://github.com/fastify/fastify-etag#readme",
   "devDependencies": {
     "@types/node": "^14.0.1",
-    "autocannon": "^6.0.0",
+    "autocannon": "^7.0.0",
     "fastify": "^3.0.0",
     "snazzy": "^9.0.0",
     "standard": "^16.0.0",
