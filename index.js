@@ -4,17 +4,26 @@ const fp = require('fastify-plugin')
 const { createHash } = require('crypto')
 const fnv1a = require('./fnv1a')
 
-function buildHashFn (algorithm = 'fnv1a') {
-  if (algorithm === 'fnv1a') {
-    return (payload) => '"' + fnv1a(payload).toString(36) + '"'
-  }
+function buildHashFn (algorithm = 'fnv1a', weak = false) {
+  if (weak) {
+    if (algorithm === 'fnv1a') {
+      return (payload) => 'W/"' + fnv1a(payload).toString(36) + '"'
+    }
 
-  return (payload) => '"' + createHash(algorithm)
-    .update(payload).digest().toString('base64') + '"'
+    return (payload) => 'W/"' + createHash(algorithm)
+      .update(payload).digest().toString('base64') + '"'
+  } else {
+    if (algorithm === 'fnv1a') {
+      return (payload) => '"' + fnv1a(payload).toString(36) + '"'
+    }
+
+    return (payload) => '"' + createHash(algorithm)
+      .update(payload).digest().toString('base64') + '"'
+  }
 }
 
 module.exports = fp(async function etag (app, opts) {
-  const hash = buildHashFn(opts.algorithm)
+  const hash = buildHashFn(opts.algorithm, opts.weak)
 
   app.addHook('onSend', function (req, reply, payload, done) {
     let etag = reply.getHeader('etag')

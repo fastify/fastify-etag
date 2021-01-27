@@ -89,4 +89,15 @@ module.exports = function ({ test }, etagOpts, hashFn) {
       etag: '"foobar"'
     })
   })
+
+  test('returns a weak etag for each request when weak is in opts', async (t) => {
+    const res = await build({ weak: true }).inject({
+      url: '/'
+    })
+
+    t.same(JSON.parse(res.body), { hello: 'world' })
+    t.match(res.headers, {
+      etag: 'W/' + hash
+    })
+  })
 }
