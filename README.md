@@ -41,6 +41,8 @@ app.listen(3000)
 * `algorithm`: all hashing algorithm that Node.js support, and
   `'fnv1a'`. Default: `'fnv1a'`.
 
+* `weak`: generates weak ETags by default. Default: `false`.
+
 ## Acknowledgements
 
 The fnv1a logic was forked from https://github.com/sindresorhus/fnv1a
