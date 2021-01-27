@@ -5,21 +5,13 @@ const { createHash } = require('crypto')
 const fnv1a = require('./fnv1a')
 
 function buildHashFn (algorithm = 'fnv1a', weak = false) {
-  if (weak) {
-    if (algorithm === 'fnv1a') {
-      return (payload) => 'W/"' + fnv1a(payload).toString(36) + '"'
-    }
-
-    return (payload) => 'W/"' + createHash(algorithm)
-      .update(payload).digest().toString('base64') + '"'
-  } else {
-    if (algorithm === 'fnv1a') {
-      return (payload) => '"' + fnv1a(payload).toString(36) + '"'
-    }
-
-    return (payload) => '"' + createHash(algorithm)
-      .update(payload).digest().toString('base64') + '"'
+  const prefix = weak ? 'W/"' : '"'
+  if (algorithm === 'fnv1a') {
+    return (payload) => prefix + fnv1a(payload).toString(36) + '"'
   }
+
+  return (payload) => prefix + createHash(algorithm)
+    .update(payload).digest().toString('base64') + '"'
 }
 
 module.exports = fp(async function etag (app, opts) {
