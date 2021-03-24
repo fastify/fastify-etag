@@ -4,9 +4,9 @@
   "description": "Automatically generate etags for HTTP responses, for Fastify",
   "main": "index.js",
   "scripts": {
-    "typescript": "tsd",
+    "bench": "node benchmarks/run.js",
     "test": "standard | snazzy && tsd && tap -J test/*.test.js && npm run typescript",
-    "bench": "node benchmarks/run.js"
+    "typescript": "tsd"
   },
   "repository": {
     "type": "git",
