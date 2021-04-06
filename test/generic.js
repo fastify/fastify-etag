@@ -46,8 +46,8 @@ module.exports = function ({ test }, etagOpts, hashFn) {
       }
     })
 
-    t.is(res.statusCode, 304)
-    t.is(res.body, '')
+    t.equal(res.statusCode, 304)
+    t.equal(res.body, '')
     t.match(res.headers, {
       'content-length': '0',
       etag: hash
@@ -59,7 +59,7 @@ module.exports = function ({ test }, etagOpts, hashFn) {
       url: '/etag'
     })
 
-    t.is(res.statusCode, 200)
+    t.equal(res.statusCode, 200)
     t.match(res.headers, {
       etag: '"foobar"'
     })
@@ -70,8 +70,8 @@ module.exports = function ({ test }, etagOpts, hashFn) {
       url: '/stream'
     })
 
-    t.is(res.statusCode, 200)
-    t.is(res.headers.etag, undefined)
+    t.equal(res.statusCode, 200)
+    t.equal(res.headers.etag, undefined)
   })
 
   test('returns a 304 if etag matches and it is provided by the route', async (t) => {
@@ -82,8 +82,8 @@ module.exports = function ({ test }, etagOpts, hashFn) {
       }
     })
 
-    t.is(res.statusCode, 304)
-    t.is(res.body, '')
+    t.equal(res.statusCode, 304)
+    t.equal(res.body, '')
     t.match(res.headers, {
       'content-length': '0',
       etag: '"foobar"'
