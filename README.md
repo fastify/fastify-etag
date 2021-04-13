@@ -5,9 +5,9 @@
 [![Known Vulnerabilities](https://snyk.io/test/github/fastify/fastify-etag/badge.svg)](https://snyk.io/test/github/fastify/fastify-etag)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://standardjs.com/)
 
-Automatically generate HTTP etags and return 304 when needed,
+A plugin for [Fastify](https://www.fastify.io) that automatically generates HTTP ETags and returns 304 when needed,
 according to [RFC2616-sec13](https://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html).
-A plugin for [Fastify](https://www.fastify.io).
+
 
 ## Install
 
@@ -56,9 +56,8 @@ and adapted to support buffers.
 
 * `md5` algorithm: 29679 req/s (median)
 * `sha1` algorithm: 25935 req/s (median)
-* *`fnv1a` algorithm: 42943 req/s (median)*
-
-No etag generation: 45471 req/s (median)
+* `fnv1a` algorithm: 42943 req/s (median)
+* No ETag generation: 45471 req/s (median)
 
 ## License
 
