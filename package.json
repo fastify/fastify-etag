@@ -1,6 +1,6 @@
 {
-  "name": "fastify-etag",
-  "version": "2.1.0",
+  "name": "@fastify/etag",
+  "version": "3.0.0",
   "description": "Automatically generate etags for HTTP responses, for Fastify",
   "main": "index.js",
   "scripts": {
@@ -40,5 +40,8 @@
   },
   "tsd": {
     "directory": "test/types"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
