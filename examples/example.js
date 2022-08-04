@@ -1,7 +1,7 @@
 'use strict'
 
 const Fastify = require('fastify')
-const Etag = require('.')
+const Etag = require('..')
 
 const app = Fastify()
 app.register(Etag, {
@@ -12,4 +12,4 @@ app.get('/', async (req, reply) => {
   return { hello: 'world' }
 })
 
-app.listen(3000)
+app.listen({ port: 3000 })
