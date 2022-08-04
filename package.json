@@ -5,8 +5,10 @@
   "main": "index.js",
   "scripts": {
     "bench": "node benchmarks/run.js",
-    "test": "standard | snazzy && tsd && tap -J test/*.test.js && npm run typescript",
-    "typescript": "tsd"
+    "lint": "standard | snazzy",
+    "test": "npm run test:unit && npm run test:typescript",
+    "test:unit": "tap",
+    "test:typescript": "tsd"
   },
   "repository": {
     "type": "git",
