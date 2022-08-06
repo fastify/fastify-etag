@@ -3,10 +3,13 @@
   "version": "4.0.0",
   "description": "Automatically generate etags for HTTP responses, for Fastify",
   "main": "index.js",
+  "types": "types/index.d.ts",
   "scripts": {
     "bench": "node benchmarks/run.js",
-    "test": "standard | snazzy && tsd && tap -J test/*.test.js && npm run typescript",
-    "typescript": "tsd"
+    "lint": "standard | snazzy",
+    "test": "npm run test:unit && npm run test:typescript",
+    "test:unit": "tap",
+    "test:typescript": "tsd"
   },
   "repository": {
     "type": "git",
@@ -32,7 +35,6 @@
     "snazzy": "^9.0.0",
     "standard": "^17.0.0",
     "tap": "^16.0.0",
-    "typescript": "^4.0.2",
     "tsd": "^0.22.0"
   },
   "dependencies": {

@@ -14,7 +14,7 @@ const contentSize = Number(process.env.CONTENT_SIZE) || contentBase.length
 
 let content = contentBase
   .repeat(Math.ceil(contentSize / contentBase.length))
-  .substr(0, contentSize)
+  .slice(0, contentSize)
 
 if (contentFormat === 'buffer') {
   content = Buffer.from(content)
@@ -32,7 +32,7 @@ async function run () {
   })
 
   try {
-    await app.listen(port)
+    await app.listen({ port })
     app.log.info(`Server started on port ${port}`, { algorithm, contentFormat, contentSize })
   } catch (err) {
     app.log.error(`Cannot start server: ${err}`)

@@ -4,7 +4,22 @@ const fp = require('fastify-plugin')
 const { createHash } = require('crypto')
 const fnv1a = require('./fnv1a')
 
+function validateAlgorithm (algorithm) {
+  if (algorithm === 'fnv1a') {
+    return true
+  }
+
+  // validate that the algorithm is supported by the node runtime
+  try {
+    createHash(algorithm)
+  } catch (e) {
+    throw new TypeError(`Algorithm ${algorithm} not supported.`)
+  }
+}
+
 function buildHashFn (algorithm = 'fnv1a', weak = false) {
+  validateAlgorithm(algorithm)
+
   const prefix = weak ? 'W/"' : '"'
   if (algorithm === 'fnv1a') {
     return (payload) => prefix + fnv1a(payload).toString(36) + '"'

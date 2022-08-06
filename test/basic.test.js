@@ -4,6 +4,13 @@ const { test } = require('tap')
 const { createHash } = require('crypto')
 const generic = require('./generic')
 const fnv1a = require('../fnv1a')
+const Fastify = require('fastify')
+const Etag = require('..')
+
+test('should throw an Error if used non valid algorithm', async t => {
+  const app = Fastify()
+  t.rejects(() => Etag(app, { algorithm: 'invalid' }), 'Algorithm invalid not supported.')
+})
 
 test('strong md5', async (t) => {
   generic(t, {
