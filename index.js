@@ -29,7 +29,7 @@ function buildHashFn (algorithm = 'fnv1a', weak = false) {
     .update(payload).digest().toString('base64') + '"'
 }
 
-module.exports = fp(async function etag (app, opts) {
+async function fastifyEtag (app, opts) {
   const hash = buildHashFn(opts.algorithm, opts.weak)
 
   app.addHook('onSend', function (req, reply, payload, done) {
@@ -54,7 +54,11 @@ module.exports = fp(async function etag (app, opts) {
     }
     done(null, newPayload)
   })
-}, {
+}
+
+module.exports = fp(fastifyEtag, {
   fastify: '4.x',
   name: '@fastify/etag'
 })
+module.exports.default = fastifyEtag
+module.exports.fastifyEtag = fastifyEtag
