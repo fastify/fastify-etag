@@ -53,7 +53,7 @@ The fnv1a logic was forked from https://github.com/sindresorhus/fnv1a and adapte
 
 Generating an etag will always be slower than not generating an etag. The generation speed also depends on the payload size and type (buffer or string):
 
-* For very small payloads (< 2 kb), use `'fnv1a`'
+* For very small payloads (< 2 kb), use `'fnv1a'`
 * For buffers above 2 mb, use `'md5'`
 * In all other scenarios, use `'sha1'` (default)
 * YMMV, see [this issue](https://github.com/fastify/fastify-etag/issues/91) where other algorithms such as crc32 for small payloads and murmurhash3-wasm for big buffers have performed better than the mentioned recommendations
