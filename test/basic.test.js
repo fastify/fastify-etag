@@ -36,8 +36,8 @@ test('weak fnv1a', async (t) => {
   })
 })
 
-test('default -> fnv1a', async (t) => {
+test('default -> sha1', async (t) => {
   generic(t, {}, (body) => {
-    return '"' + fnv1a(body).toString(36) + '"'
+    return '"' + createHash('sha1').update(body).digest().toString('base64') + '"'
   })
 })
