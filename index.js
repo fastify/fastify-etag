@@ -17,7 +17,7 @@ function validateAlgorithm (algorithm) {
   }
 }
 
-function buildHashFn (algorithm = 'fnv1a', weak = false) {
+function buildHashFn (algorithm = 'sha1', weak = false) {
   validateAlgorithm(algorithm)
 
   const prefix = weak ? 'W/"' : '"'
@@ -26,7 +26,7 @@ function buildHashFn (algorithm = 'fnv1a', weak = false) {
   }
 
   return (payload) => prefix + createHash(algorithm)
-    .update(payload).digest().toString('base64') + '"'
+    .update(payload).digest('base64') + '"'
 }
 
 async function fastifyEtag (app, opts) {
