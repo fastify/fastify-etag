@@ -41,7 +41,7 @@ app.listen(3000)
 
 ## Plugin Options
 
-* `algorithm`: all hashing algorithms the Node.js [`crypto`](https://nodejs.org/api/crypto.html) module supports, and `'fnv1a'. Default: `'sha1'`.
+* `algorithm`: all hashing algorithms the Node.js [`crypto`](https://nodejs.org/api/crypto.html) module supports, and `'fnv1a'`. Default: `'sha1'`.
 
 * `weak`: generates weak ETags by default. Default: `false`.
 
