@@ -115,4 +115,52 @@ module.exports = function ({ test }, etagOpts, hashFn) {
       etag: 'W/' + hash
     })
   })
+
+  test('returns a 304 if weak etag matches', async (t) => {
+    const res = await build({ weak: true }).inject({
+      url: '/',
+      headers: {
+        'If-None-Match': 'W/' + hash
+      }
+    })
+
+    t.equal(res.statusCode, 304)
+    t.equal(res.body, '')
+    t.match(res.headers, {
+      'content-length': '0',
+      etag: 'W/' + hash
+    })
+  })
+
+  test('returns a 304 if etag is strong and If-None-Match is weak', async (t) => {
+    const res = await build().inject({
+      url: '/',
+      headers: {
+        'If-None-Match': 'W/' + hash
+      }
+    })
+
+    t.equal(res.statusCode, 304)
+    t.equal(res.body, '')
+    t.match(res.headers, {
+      'content-length': '0',
+      etag: hash
+    })
+  })
+
+  test('returns a 304 if etag is weak and If-None-Match is strong', async (t) => {
+    const res = await build({ weak: true }).inject({
+      url: '/',
+      headers: {
+        'If-None-Match': hash
+      }
+    })
+
+    t.equal(res.statusCode, 304)
+    t.equal(res.body, '')
+    t.match(res.headers, {
+      'content-length': '0',
+      etag: 'W/' + hash
+    })
+  })
 }
