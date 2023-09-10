@@ -1,7 +1,7 @@
 'use strict'
 
 const { test } = require('tap')
-const { createHash } = require('crypto')
+const { createHash } = require('node:crypto')
 const generic = require('./generic')
 const fnv1a = require('../fnv1a')
 const Fastify = require('fastify')

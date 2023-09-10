@@ -2,7 +2,7 @@
 
 const Fastify = require('fastify')
 const Etag = require('..')
-const { createReadStream } = require('fs')
+const { createReadStream } = require('node:fs')
 
 module.exports = function ({ test }, etagOpts, hashFn) {
   function build (opts = {}) {

@@ -1,8 +1,8 @@
 'use strict'
 
-const { writeFileSync, openSync, closeSync } = require('fs')
-const { spawn } = require('child_process')
-const { resolve, join } = require('path')
+const { writeFileSync, openSync, closeSync } = require('node:fs')
+const { spawn } = require('node:child_process')
+const { resolve, join } = require('node:path')
 const autocannon = require('autocannon')
 const testCases = require('./testCases')
 
