@@ -1,7 +1,7 @@
 'use strict'
 
 const fp = require('fastify-plugin')
-const { createHash } = require('crypto')
+const { createHash } = require('node:crypto')
 const fnv1a = require('./fnv1a')
 
 function validateAlgorithm (algorithm) {
