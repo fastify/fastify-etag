@@ -3,6 +3,7 @@
   "version": "4.2.0",
   "description": "Automatically generate etags for HTTP responses, for Fastify",
   "main": "index.js",
+  "type": "commonjs",
   "types": "types/index.d.ts",
   "scripts": {
     "bench": "node benchmarks/run.js",
