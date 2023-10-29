@@ -73,10 +73,10 @@ async function run () {
     const benchResults = await shoot(port)
     console.log(`> ${benchResults.requests.mean} req/sec - Latency: ${benchResults.latency.mean}ms\n\n`)
 
-    if (typeof results[test.group] === 'undefined') {
+    if (results[test.group] === undefined) {
       results[test.group] = {}
     }
-    if (typeof results[test.group][test.subgroup] === 'undefined') {
+    if (results[test.group][test.subgroup] === undefined) {
       results[test.group][test.subgroup] = []
     }
     results[test.group][test.subgroup].push({ name: test.name, results: benchResults })
