@@ -29,8 +29,8 @@ function buildHashFn (algorithm = 'sha1', weak = false) {
     .update(payload).digest('base64') + '"'
 }
 
-async function fastifyEtag (app, opts) {
-  const hash = buildHashFn(opts.algorithm, opts.weak)
+async function fastifyEtag (app, { algorithm, weak, replyWith304 = true }) {
+  const hash = buildHashFn(algorithm, weak)
 
   app.addHook('onSend', function (req, reply, payload, done) {
     let etag = reply.getHeader('etag')
@@ -48,7 +48,7 @@ async function fastifyEtag (app, opts) {
       reply.header('etag', etag)
     }
 
-    if (req.headers['if-none-match'] === etag) {
+    if (req.headers['if-none-match'] === etag && replyWith304) {
       reply.code(304)
       newPayload = ''
     }

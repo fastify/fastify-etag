@@ -54,6 +54,21 @@ module.exports = function ({ test }, etagOpts, hashFn) {
     })
   })
 
+  test('does not return a 304 when behaviour is disabled', async (t) => {
+    const res = await build({ replyWith304: false }).inject({
+      url: '/',
+      headers: {
+        'If-None-Match': hash
+      }
+    })
+
+    t.same(JSON.parse(res.body), { hello: 'world' })
+    t.equal(res.statusCode, 200)
+    t.match(res.headers, {
+      etag: hash
+    })
+  })
+
   test('returns an already existing etag', async (t) => {
     const res = await build().inject({
       url: '/etag'

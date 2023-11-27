@@ -6,6 +6,7 @@ declare namespace fastifyEtag {
   export interface FastifyEtagOptions {
     algorithm?: 'fnv1a' | string;
     weak?: boolean;
+    replyWith304?: boolean;
   }
 
   export const fastifyEtag: FastifyEtag
