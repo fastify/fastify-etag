@@ -4,7 +4,7 @@
 [![NPM version](https://img.shields.io/npm/v/@fastify/etag.svg?style=flat)](https://www.npmjs.com/package/@fastify/etag)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://standardjs.com/)
 
-A plugin for [Fastify](https://www.fastify.dev) that automatically generates HTTP ETags according to [RFC2616-sec13](https://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html).
+A plugin for [Fastify](https://fastify.dev) that automatically generates HTTP ETags according to [RFC2616-sec13](https://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html).
 
 The plugin can optionally send a 304 status code when an ETag matches the if-none-match header.
 
