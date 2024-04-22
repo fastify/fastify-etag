@@ -1,6 +1,6 @@
 {
   "name": "@fastify/etag",
-  "version": "5.1.0",
+  "version": "5.2.0",
   "description": "Automatically generate etags for HTTP responses, for Fastify",
   "main": "index.js",
   "type": "commonjs",
