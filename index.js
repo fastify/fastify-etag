@@ -57,7 +57,7 @@ async function fastifyEtag (app, { algorithm, weak, replyWith304 = true }) {
 }
 
 module.exports = fp(fastifyEtag, {
-  fastify: '4.x',
+  fastify: '5.x',
   name: '@fastify/etag'
 })
 module.exports.default = fastifyEtag
