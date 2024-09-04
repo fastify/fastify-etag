@@ -1,6 +1,6 @@
 {
   "name": "@fastify/etag",
-  "version": "6.0.0-pre.fv5.2",
+  "version": "6.0.0",
   "description": "Automatically generate etags for HTTP responses, for Fastify",
   "main": "index.js",
   "type": "commonjs",
@@ -32,14 +32,14 @@
   "devDependencies": {
     "@types/node": "^22.0.0",
     "autocannon": "^7.15.0",
-    "fastify": "^5.0.0-alpha.3",
+    "fastify": "^5.0.0-alpha.4",
     "snazzy": "^9.0.0",
     "standard": "^17.1.0",
     "tap": "^18.7.1",
     "tsd": "^0.31.0"
   },
   "dependencies": {
-    "fastify-plugin": "^5.0.0-pre.fv5.1"
+    "fastify-plugin": "^5.0.0"
   },
   "tsd": {
     "directory": "test/types"
