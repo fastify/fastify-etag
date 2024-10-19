@@ -12,7 +12,7 @@ function validateAlgorithm (algorithm) {
   // validate that the algorithm is supported by the node runtime
   try {
     createHash(algorithm)
-  } catch (e) {
+  } catch {
     throw new TypeError(`Algorithm ${algorithm} not supported.`)
   }
 }
