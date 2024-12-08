@@ -13,5 +13,5 @@ declare namespace fastifyEtag {
   export { fastifyEtag as default }
 }
 
-declare function fastifyEtag(...params: Parameters<FastifyEtag>): ReturnType<FastifyEtag>
+declare function fastifyEtag (...params: Parameters<FastifyEtag>): ReturnType<FastifyEtag>
 export = fastifyEtag
