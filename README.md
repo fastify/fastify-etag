@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/fastify/fastify-etag/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/fastify/fastify-etag/actions/workflows/ci.yml)
 [![NPM version](https://img.shields.io/npm/v/@fastify/etag.svg?style=flat)](https://www.npmjs.com/package/@fastify/etag)
-[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://standardjs.com/)
+[![neostandard javascript style](https://img.shields.io/badge/code_style-neostandard-brightgreen?style=flat)](https://github.com/neostandard/neostandard)
 
 A plugin for [Fastify](https://fastify.dev) that automatically generates HTTP ETags according to [RFC2616-sec13](https://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html).
 
