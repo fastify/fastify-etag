@@ -50,7 +50,7 @@ app.listen(3000)
 
 By default, the plugin sends a 304 status code when the ETag is equal to the Etag specified by the if-none-match request header.
 
-This is often the desired behaviour, but can be disabled by setting `replyWith304: false`.
+This is often the desired behavior, but can be disabled by setting `replyWith304: false`.
 
 ## Acknowledgements
 
