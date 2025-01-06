@@ -4,7 +4,7 @@ const Fastify = require('fastify')
 const Etag = require('..')
 const { createReadStream } = require('node:fs')
 
-module.exports = function ({ test }, etagOpts, hashFn) {
+module.exports = async function (t, etagOpts, hashFn) {
   function build (opts = {}) {
     const app = Fastify()
     app.register(Etag, Object.assign({}, opts, etagOpts))
@@ -27,7 +27,7 @@ module.exports = function ({ test }, etagOpts, hashFn) {
 
   const hash = hashFn(JSON.stringify({ hello: 'world' }))
 
-  test('returns an etag for each request', async (t) => {
+  await t.test('returns an etag for each request', async (t) => {
     const res = await build().inject({
       url: '/'
     })
@@ -36,7 +36,7 @@ module.exports = function ({ test }, etagOpts, hashFn) {
     t.assert.deepStrictEqual(res.headers.etag, hash)
   })
 
-  test('returns a 304 if etag matches', async (t) => {
+  await t.test('returns a 304 if etag matches', async (t) => {
     const res = await build().inject({
       url: '/',
       headers: {
@@ -50,7 +50,7 @@ module.exports = function ({ test }, etagOpts, hashFn) {
     t.assert.deepStrictEqual(res.headers['content-length'], '0')
   })
 
-  test('does not return a 304 when behaviour is disabled', async (t) => {
+  await t.test('does not return a 304 when behaviour is disabled', async (t) => {
     const res = await build({ replyWith304: false }).inject({
       url: '/',
       headers: {
@@ -63,7 +63,7 @@ module.exports = function ({ test }, etagOpts, hashFn) {
     t.assert.deepStrictEqual(res.headers.etag, hash)
   })
 
-  test('returns an already existing etag', async (t) => {
+  await t.test('returns an already existing etag', async (t) => {
     const res = await build().inject({
       url: '/etag'
     })
@@ -72,7 +72,7 @@ module.exports = function ({ test }, etagOpts, hashFn) {
     t.assert.deepStrictEqual(res.headers.etag, '"foobar"')
   })
 
-  test('does not generate etags for streams', async (t) => {
+  await t.test('does not generate etags for streams', async (t) => {
     const res = await build().inject({
       url: '/stream'
     })
@@ -81,7 +81,7 @@ module.exports = function ({ test }, etagOpts, hashFn) {
     t.assert.deepStrictEqual(res.headers.etag, undefined)
   })
 
-  test('returns a 304 if etag matches and it is provided by the route', async (t) => {
+  await t.test('returns a 304 if etag matches and it is provided by the route', async (t) => {
     const res = await build().inject({
       url: '/etag',
       headers: {
@@ -95,7 +95,7 @@ module.exports = function ({ test }, etagOpts, hashFn) {
     t.assert.deepStrictEqual(res.headers['content-length'], '0')
   })
 
-  test('returns a weak etag for each request when weak is in opts', async (t) => {
+  await t.test('returns a weak etag for each request when weak is in opts', async (t) => {
     const res = await build({ weak: true }).inject({
       url: '/'
     })
@@ -104,7 +104,7 @@ module.exports = function ({ test }, etagOpts, hashFn) {
     t.assert.deepStrictEqual(res.headers.etag, 'W/' + hash)
   })
 
-  test('returns a 304 if weak etag matches', async (t) => {
+  await t.test('returns a 304 if weak etag matches', async (t) => {
     const res = await build({ weak: true }).inject({
       url: '/',
       headers: {
@@ -118,7 +118,7 @@ module.exports = function ({ test }, etagOpts, hashFn) {
     t.assert.deepStrictEqual(res.headers.etag, 'W/' + hash)
   })
 
-  test('returns a 304 if etag is strong and If-None-Match is weak', async (t) => {
+  await t.test('returns a 304 if etag is strong and If-None-Match is weak', async (t) => {
     const res = await build().inject({
       url: '/',
       headers: {
@@ -132,7 +132,7 @@ module.exports = function ({ test }, etagOpts, hashFn) {
     t.assert.deepStrictEqual(res.headers.etag, hash)
   })
 
-  test('returns a 304 if etag is weak and If-None-Match is strong', async (t) => {
+  await t.test('returns a 304 if etag is weak and If-None-Match is strong', async (t) => {
     const res = await build({ weak: true }).inject({
       url: '/',
       headers: {
@@ -143,6 +143,6 @@ module.exports = function ({ test }, etagOpts, hashFn) {
     t.assert.deepStrictEqual(res.statusCode, 304)
     t.assert.deepStrictEqual(res.body, '')
     t.assert.deepStrictEqual(res.headers['content-length'], '0')
-    t.assert.deepStrictEqual(res.headers.etag, hash)
+    t.assert.deepStrictEqual(res.headers.etag, 'W/' + hash)
   })
 }
