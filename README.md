@@ -15,6 +15,19 @@ The plugin can optionally send a 304 status code when an ETag matches the if-non
 npm i @fastify/etag
 ```
 
+### Compatibility
+| Plugin version | Fastify version |
+| ---------------|-----------------|
+| `^6.x`         | `^5.x`          |
+| `^4.x`         | `^4.x`          |
+| `^3.x`         | `^3.x`          |
+| `^1.x`         | `^2.x`          |
+
+
+Please note that if a Fastify version is out of support, then so are the corresponding versions of this plugin
+in the table above.
+See [Fastify's LTS policy](https://github.com/fastify/fastify/blob/main/docs/Reference/LTS.md) for more details.
+
 ## Example
 
 ```js
@@ -69,4 +82,4 @@ Generating an etag will always be slower than not generating an etag. The genera
 
 ## License
 
-MIT
+Licensed under [MIT](./LICENSE).
