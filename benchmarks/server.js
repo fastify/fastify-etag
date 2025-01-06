@@ -27,7 +27,7 @@ async function run () {
     app.register(Etag, { algorithm })
   }
 
-  app.get('/', async (req, reply) => {
+  app.get('/', async () => {
     return content
   })
 

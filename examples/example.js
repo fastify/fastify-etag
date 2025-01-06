@@ -8,7 +8,7 @@ app.register(Etag, {
   algorithm: 'fnv1a'
 })
 
-app.get('/', async (req, reply) => {
+app.get('/', async () => {
   return { hello: 'world' }
 })
 
