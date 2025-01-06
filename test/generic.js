@@ -9,16 +9,16 @@ module.exports = function ({ test }, etagOpts, hashFn) {
     const app = Fastify()
     app.register(Etag, Object.assign({}, opts, etagOpts))
 
-    app.get('/', async (req, reply) => {
+    app.get('/', async () => {
       return { hello: 'world' }
     })
 
-    app.get('/etag', async (req, reply) => {
+    app.get('/etag', async (_req, reply) => {
       reply.header('etag', '"foobar"')
       return 'world'
     })
 
-    app.get('/stream', async (req, reply) => {
+    app.get('/stream', async () => {
       return createReadStream(__filename)
     })
 
