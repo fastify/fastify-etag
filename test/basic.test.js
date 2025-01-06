@@ -1,6 +1,6 @@
 'use strict'
 
-const { test } = require('tap')
+const { test } = require('node:test')
 const { createHash } = require('node:crypto')
 const generic = require('./generic')
 const fnv1a = require('../fnv1a')
@@ -9,7 +9,7 @@ const Etag = require('..')
 
 test('should throw an Error if used non valid algorithm', async t => {
   const app = Fastify()
-  t.rejects(() => Etag(app, { algorithm: 'invalid' }), 'Algorithm invalid not supported.')
+  t.assert.rejects(() => Etag(app, { algorithm: 'invalid' }), 'Algorithm invalid not supported.')
 })
 
 test('strong md5', async (t) => {
