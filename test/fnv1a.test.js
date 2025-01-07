@@ -21,49 +21,49 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 // SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-const { test } = require('tap')
+const { test } = require('node:test')
 const fnv1a = require('../fnv1a')
 
 test('string', async t => {
-  t.equal(fnv1a(''), 2166136261)
-  t.equal(fnv1a('🦄🌈'), 582881315)
+  t.assert.deepStrictEqual(fnv1a(''), 2166136261)
+  t.assert.deepStrictEqual(fnv1a('🦄🌈'), 582881315)
 
-  t.equal(fnv1a('h'), 3977000791)
-  t.equal(fnv1a('he'), 1547363254)
-  t.equal(fnv1a('hel'), 179613742)
-  t.equal(fnv1a('hell'), 477198310)
-  t.equal(fnv1a('hello'), 1335831723)
-  t.equal(fnv1a('hello '), 3801292497)
-  t.equal(fnv1a('hello w'), 1402552146)
-  t.equal(fnv1a('hello wo'), 3611200775)
-  t.equal(fnv1a('hello wor'), 1282977583)
-  t.equal(fnv1a('hello worl'), 2767971961)
-  t.equal(fnv1a('hello world'), 3582672807)
+  t.assert.deepStrictEqual(fnv1a('h'), 3977000791)
+  t.assert.deepStrictEqual(fnv1a('he'), 1547363254)
+  t.assert.deepStrictEqual(fnv1a('hel'), 179613742)
+  t.assert.deepStrictEqual(fnv1a('hell'), 477198310)
+  t.assert.deepStrictEqual(fnv1a('hello'), 1335831723)
+  t.assert.deepStrictEqual(fnv1a('hello '), 3801292497)
+  t.assert.deepStrictEqual(fnv1a('hello w'), 1402552146)
+  t.assert.deepStrictEqual(fnv1a('hello wo'), 3611200775)
+  t.assert.deepStrictEqual(fnv1a('hello wor'), 1282977583)
+  t.assert.deepStrictEqual(fnv1a('hello worl'), 2767971961)
+  t.assert.deepStrictEqual(fnv1a('hello world'), 3582672807)
 
-  t.equal(fnv1a('Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.'), 2964896417)
+  t.assert.deepStrictEqual(fnv1a('Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.'), 2964896417)
 })
 
 test('buffer', async t => {
-  t.equal(fnv1a(Buffer.from('')), 2166136261)
-  t.equal(fnv1a(Buffer.from('🦄🌈')), 2868248295)
+  t.assert.deepStrictEqual(fnv1a(Buffer.from('')), 2166136261)
+  t.assert.deepStrictEqual(fnv1a(Buffer.from('🦄🌈')), 2868248295)
 
-  t.equal(fnv1a(Buffer.from('h')), 3977000791)
-  t.equal(fnv1a(Buffer.from('he')), 1547363254)
-  t.equal(fnv1a(Buffer.from('hel')), 179613742)
-  t.equal(fnv1a(Buffer.from('hell')), 477198310)
-  t.equal(fnv1a(Buffer.from('hello')), 1335831723)
-  t.equal(fnv1a(Buffer.from('hello ')), 3801292497)
-  t.equal(fnv1a(Buffer.from('hello w')), 1402552146)
-  t.equal(fnv1a(Buffer.from('hello wo')), 3611200775)
-  t.equal(fnv1a(Buffer.from('hello wor')), 1282977583)
-  t.equal(fnv1a(Buffer.from('hello worl')), 2767971961)
-  t.equal(fnv1a(Buffer.from('hello world')), 3582672807)
+  t.assert.deepStrictEqual(fnv1a(Buffer.from('h')), 3977000791)
+  t.assert.deepStrictEqual(fnv1a(Buffer.from('he')), 1547363254)
+  t.assert.deepStrictEqual(fnv1a(Buffer.from('hel')), 179613742)
+  t.assert.deepStrictEqual(fnv1a(Buffer.from('hell')), 477198310)
+  t.assert.deepStrictEqual(fnv1a(Buffer.from('hello')), 1335831723)
+  t.assert.deepStrictEqual(fnv1a(Buffer.from('hello ')), 3801292497)
+  t.assert.deepStrictEqual(fnv1a(Buffer.from('hello w')), 1402552146)
+  t.assert.deepStrictEqual(fnv1a(Buffer.from('hello wo')), 3611200775)
+  t.assert.deepStrictEqual(fnv1a(Buffer.from('hello wor')), 1282977583)
+  t.assert.deepStrictEqual(fnv1a(Buffer.from('hello worl')), 2767971961)
+  t.assert.deepStrictEqual(fnv1a(Buffer.from('hello world')), 3582672807)
 
-  t.equal(fnv1a(Buffer.from('Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.')), 2964896417)
+  t.assert.deepStrictEqual(fnv1a(Buffer.from('Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.')), 2964896417)
 })
 
 test('can\'t hash objects', async t => {
-  t.throws(() => {
+  t.assert.throws(() => {
     fnv1a({})
   })
 })
