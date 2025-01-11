@@ -65,7 +65,7 @@ By default, the plugin sends a 304 status code when the ETag is equal to the Eta
 
 This is often the desired behavior, but can be disabled by setting `replyWith304: false`.
 
-## Acknowledgements
+## Acknowledgments
 
 The fnv1a logic was forked from https://github.com/sindresorhus/fnv1a and adapted to support buffers.
 
