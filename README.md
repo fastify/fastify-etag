@@ -18,10 +18,10 @@ npm i @fastify/etag
 ### Compatibility
 | Plugin version | Fastify version |
 | ---------------|-----------------|
-| `^6.x`         | `^5.x`          |
-| `^4.x`         | `^4.x`          |
+| `>=6.x`        | `^5.x`          |
+| `>=4.x <6.x`   | `^4.x`          |
 | `^3.x`         | `^3.x`          |
-| `^1.x`         | `^2.x`          |
+| `>=1.x <3.x`   | `^2.x`          |
 
 
 Please note that if a Fastify version is out of support, then so are the corresponding versions of this plugin
