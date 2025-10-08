@@ -67,7 +67,7 @@ This is often the desired behavior, but can be disabled by setting `replyWith304
 
 ## Acknowledgments
 
-The fnv1a logic was forked from https://github.com/sindresorhus/fnv1a and adapted to support buffers.
+The fnv1a logic was forked from Travis Webb ([@tjwebb](https://github.com/tjwebb))'s https://github.com/tjwebb/fnv-plus, the actual implementation is contributed to `fnv-plus` by [@desudesutalk](https://github.com/desudesutalk) in https://github.com/tjwebb/fnv-plus/pull/9, and adapted by [@SukkaW](https://github.com/SukkaW) to support buffers.
 
 ## Benchmarks
 
