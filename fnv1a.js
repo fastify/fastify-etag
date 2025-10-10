@@ -2,7 +2,9 @@
 
 // MIT License
 //
-// Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)
+// Copyright (c) desudesutalk (https://github.com/desudesutalk)
+// Copyright (c) Travis Webb <me@traviswebb.com>
+// Copyright (c) SukkaW <hi@skk.moe> (https://skk.moe)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
 // copy of this software and associated documentation files (the "Software"),
@@ -21,44 +23,60 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 // SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-const OFFSET_BASIS_32 = 2166136261
+// The fnv1a implementation is created by @desudesutalk (https://github.com/desudesutalk) in
+// https://github.com/tjwebb/fnv-plus/pull/9, and contributed to Travis Webb's
+// "fnv-plus" library. @SukkaW (https://github.com/SukkaW) modifies it to support Buffers w/o
+// sacrificing performance
 
-function fnv1aString (string) {
-  let hash = OFFSET_BASIS_32
+/**
+ * @param {string | Buffer} str
+ * @returns {string}
+ */
+function fnv1a (str) {
+  const l = str.length - 3
+  let i = 0; let t0 = 0
+  let v0 = 0x9DC5
 
-  for (let i = 0; i < string.length; i++) {
-    hash ^= string.charCodeAt(i)
+  let t1 = 0
+  let v1 = 0x811C
 
-    // 32-bit FNV prime: 2**24 + 2**8 + 0x93 = 16777619
-    // Using bitshift for accuracy and performance. Numbers in JS suck.
-    hash += (hash << 1) + (hash << 4) + (hash << 7) + (hash << 8) + (hash << 24)
-  }
+  let get
 
-  return hash >>> 0
-}
-
-function fnv1aBuffer (buf) {
-  let hash = OFFSET_BASIS_32
-
-  for (let i = 0; i < buf.length;) {
-    hash ^= buf[i++]
-
-    // 32-bit FNV prime: 2**24 + 2**8 + 0x93 = 16777619
-    // Using bitshift for accuracy and performance. Numbers in JS suck.
-    hash += (hash << 1) + (hash << 4) + (hash << 7) + (hash << 8) + (hash << 24)
-  }
-
-  return hash >>> 0
-}
-
-function fnv1a (input) {
-  if (input instanceof Buffer) {
-    return fnv1aBuffer(input)
-  } else if (typeof input === 'string') {
-    return fnv1aString(input)
+  if (str instanceof Buffer) {
+    get = (i) => str[i]
+  } else if (typeof str === 'string') {
+    get = (i) => str.charCodeAt(i)
   } else {
-    throw new Error('input must be a string or a Buffer')
+    throw new TypeError('input must be a string or a buffer')
   }
+
+  while (i < l) {
+    v0 ^= get(i++)
+    t0 = v0 * 403; t1 = v1 * 403
+    t1 += v0 << 8
+    v1 = (t1 + (t0 >>> 16)) & 65535; v0 = t0 & 65535
+    v0 ^= get(i++)
+    t0 = v0 * 403; t1 = v1 * 403
+    t1 += v0 << 8
+    v1 = (t1 + (t0 >>> 16)) & 65535; v0 = t0 & 65535
+    v0 ^= get(i++)
+    t0 = v0 * 403; t1 = v1 * 403
+    t1 += v0 << 8
+    v1 = (t1 + (t0 >>> 16)) & 65535; v0 = t0 & 65535
+    v0 ^= get(i++)
+    t0 = v0 * 403; t1 = v1 * 403
+    t1 += v0 << 8
+    v1 = (t1 + (t0 >>> 16)) & 65535; v0 = t0 & 65535
+  }
+
+  while (i < l + 3) {
+    v0 ^= get(i++)
+    t0 = v0 * 403; t1 = v1 * 403
+    t1 += v0 << 8
+    v1 = (t1 + (t0 >>> 16)) & 65535; v0 = t0 & 65535
+  }
+
+  return ((v1 << 16) >>> 0) + v0
 }
 
 module.exports = fnv1a
