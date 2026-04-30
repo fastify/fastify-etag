@@ -1,6 +1,6 @@
+import { expect } from 'tstyche'
 import fastify from 'fastify'
-import fastifyEtag from '..'
-import { expectError } from 'tsd'
+import fastifyEtag, { type FastifyEtagOptions } from '..'
 
 const app = fastify()
 
@@ -12,4 +12,4 @@ app.register(fastifyEtag, { weak: false })
 app.register(fastifyEtag, { algorithm: 'fnv1a' })
 app.register(fastifyEtag, { algorithm: 'sha256' })
 
-expectError(app.register(fastifyEtag, { weak: 1 }))
+expect({ weak: 1 }).type.not.toBeAssignableTo<FastifyEtagOptions>()
