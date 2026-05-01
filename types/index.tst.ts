@@ -12,4 +12,4 @@ app.register(fastifyEtag, { weak: false })
 app.register(fastifyEtag, { algorithm: 'fnv1a' })
 app.register(fastifyEtag, { algorithm: 'sha256' })
 
-expect({ weak: 1 }).type.not.toBeAssignableTo<FastifyEtagOptions>()
+expect<FastifyEtagOptions>().type.not.toBeAssignableFrom({ weak: 1 })
