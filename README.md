@@ -55,9 +55,39 @@ app.listen(3000)
 
 ## Plugin Options
 
-* `algorithm`: all hashing algorithms the Node.js [`crypto`](https://nodejs.org/api/crypto.html) module supports, and `'fnv1a'`. Default: `'sha1'`.
+* `algorithm`: all hashing algorithms the Node.js [`crypto`](https://nodejs.org/api/crypto.html) module supports. Default: `'sha1'`.
+
+* `hashFn`: hash function used to generate ETags. When function is provided,
+`alogrithm` option will be ignored. Default: `undefined`.
 
 * `weak`: generates weak ETags by default. Default: `false`.
+
+### Use custom hash function
+
+```js
+'use strict'
+
+const Fastify = require('fastify')
+const Etag = require('@fastify/etag')
+
+const app = Fastify()
+app.register(Etag, {
+  hashFn: Etag.fnv1a // Use fnv1a provided by @fastify/etag
+})
+
+app.get('/', async (req, reply) => {
+  return { hello: 'world' }
+})
+
+app.get('/manual-etag', async (req, reply) => {
+  // This will disable automatic ETag generation
+  // It will still return a 304 if the ETag matches
+  reply.header('etag', '"foobar"')
+  return 'world'
+})
+
+app.listen(3000)
+```
 
 ### Automatic 304 status codes
 
