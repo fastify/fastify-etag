@@ -18,7 +18,7 @@ function emitDeprecationWarning () {
   if (!emitDeprecationWarning.warned) {
     emitDeprecationWarning.warned = true
     const { emitWarning } = require('node:process')
-    emitWarning('The supported of passing "fnv1a" in `algorithm` is deprecated and will be removed in next major. Please use `hashFn` for custom hash function.', 'DeprecationWarning', 'FSTETAGDEP001')
+    emitWarning('Support for passing "fnv1a" in `algorithm` is deprecated and will be removed in the next major version. Please use `hashFn` to provide a custom hash function.', 'DeprecationWarning', 'FSTETAGDEP001')
   }
 }
 

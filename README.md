@@ -55,11 +55,8 @@ app.listen(3000)
 
 ## Plugin Options
 
-* `algorithm`: all hashing algorithms the Node.js [`crypto`](https://nodejs.org/api/crypto.html) module supports. Default: `'sha1'`.
-
-* `hashFn`: hash function used to generate ETags. When function is provided,
-`alogrithm` option will be ignored. Default: `undefined`.
-
+* `algorithm`: all hashing algorithms the Node.js [`crypto`](https://nodejs.org/api/crypto.html) module supports. Default: `'sha1'`. (`'fnv1a'` is deprecated; use `hashFn: Etag.fnv1a` instead.)
+* `hashFn`: function used to generate ETags (called with `string` or `Buffer` payload; return an unquoted hash string). When provided, `algorithm` option will be ignored. Default: `undefined`.
 * `weak`: generates weak ETags by default. Default: `false`.
 
 ### Use custom hash function
