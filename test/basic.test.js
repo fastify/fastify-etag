@@ -12,6 +12,21 @@ test('should throw an Error if used non valid algorithm', async t => {
   await t.assert.rejects(() => Etag(app, { algorithm: 'invalid' }), new TypeError('Algorithm invalid not supported.'))
 })
 
+test('should emit deprecation warning', async (t) => {
+  function inspect (error) {
+    t.assert.strictEqual(error.code, 'FSTETAGDEP001')
+  }
+  t.plan(1)
+  t.after(() => {
+    process.off('warning', inspect)
+  })
+  process.on('warning', inspect)
+  const app = Fastify()
+  Etag(app, { algorithm: 'fnv1a' })
+  Etag(app, { algorithm: 'fnv1a' })
+  await app.ready()
+})
+
 test('strong md5', (t) => generic(t, {
   algorithm: 'md5'
 }, (body) => {
@@ -26,6 +41,12 @@ test('strong sha1', (t) => generic(t, {
 
 test('weak fnv1a', (t) => generic(t, {
   algorithm: 'fnv1a'
+}, (body) => {
+  return '"' + fnv1a(body).toString(36) + '"'
+}))
+
+test('hashFn -> fnv1a', (t) => generic(t, {
+  hashFn: Etag.fnv1a
 }, (body) => {
   return '"' + fnv1a(body).toString(36) + '"'
 }))
