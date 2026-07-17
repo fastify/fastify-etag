@@ -47,7 +47,7 @@ module.exports = async function (t, etagOpts, hashFn) {
     t.assert.deepStrictEqual(res.statusCode, 304)
     t.assert.deepStrictEqual(res.body, '')
     t.assert.deepStrictEqual(res.headers.etag, hash)
-    t.assert.deepStrictEqual(res.headers['content-length'], '0')
+    t.assert.deepStrictEqual(res.headers['content-length'], undefined)
   })
 
   await t.test('does not return a 304 when behaviour is disabled', async (t) => {
@@ -92,7 +92,7 @@ module.exports = async function (t, etagOpts, hashFn) {
     t.assert.deepStrictEqual(res.statusCode, 304)
     t.assert.deepStrictEqual(res.body, '')
     t.assert.deepStrictEqual(res.headers.etag, '"foobar"')
-    t.assert.deepStrictEqual(res.headers['content-length'], '0')
+    t.assert.deepStrictEqual(res.headers['content-length'], undefined)
   })
 
   await t.test('returns a weak etag for each request when weak is in opts', async (t) => {
@@ -114,7 +114,7 @@ module.exports = async function (t, etagOpts, hashFn) {
 
     t.assert.deepStrictEqual(res.statusCode, 304)
     t.assert.deepStrictEqual(res.body, '')
-    t.assert.deepStrictEqual(res.headers['content-length'], '0')
+    t.assert.deepStrictEqual(res.headers['content-length'], undefined)
     t.assert.deepStrictEqual(res.headers.etag, 'W/' + hash)
   })
 
@@ -128,7 +128,7 @@ module.exports = async function (t, etagOpts, hashFn) {
 
     t.assert.deepStrictEqual(res.statusCode, 304)
     t.assert.deepStrictEqual(res.body, '')
-    t.assert.deepStrictEqual(res.headers['content-length'], '0')
+    t.assert.deepStrictEqual(res.headers['content-length'], undefined)
     t.assert.deepStrictEqual(res.headers.etag, hash)
   })
 
@@ -142,7 +142,7 @@ module.exports = async function (t, etagOpts, hashFn) {
 
     t.assert.deepStrictEqual(res.statusCode, 304)
     t.assert.deepStrictEqual(res.body, '')
-    t.assert.deepStrictEqual(res.headers['content-length'], '0')
+    t.assert.deepStrictEqual(res.headers['content-length'], undefined)
     t.assert.deepStrictEqual(res.headers.etag, 'W/' + hash)
   })
 }

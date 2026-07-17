@@ -75,7 +75,7 @@ async function fastifyEtag (app, { algorithm, hashFn, weak, replyWith304 = true 
 
     if (replyWith304 && (req.headers['if-none-match'] === etag || req.headers['if-none-match'] === 'W/' + etag || 'W/' + req.headers['if-none-match'] === etag)) {
       reply.code(304)
-      newPayload = ''
+      newPayload = null
     }
     done(null, newPayload)
   })
