@@ -2,7 +2,7 @@
 
 const Fastify = require('fastify')
 const Etag = require('..')
-const { createReadStream } = require('node:fs')
+const { createReadStream, readFileSync } = require('node:fs')
 
 module.exports = async function (t, etagOpts, hashFn) {
   function build (opts = {}) {
@@ -18,6 +18,15 @@ module.exports = async function (t, etagOpts, hashFn) {
       return 'world'
     })
 
+    app.get('/etag-trailer', async (_req, reply) => {
+      reply.trailer('etag', (_reply, _payload, done) => done(null, '"custom-trailer"'))
+      return 'world'
+    })
+
+    app.get('/empty', async (_req, reply) => {
+      reply.code(204).send()
+    })
+
     app.get('/stream', async () => {
       return createReadStream(__filename)
     })
@@ -26,6 +35,7 @@ module.exports = async function (t, etagOpts, hashFn) {
   }
 
   const hash = hashFn(JSON.stringify({ hello: 'world' }))
+  const streamHash = hashFn(readFileSync(__filename))
 
   await t.test('returns an etag for each request', async (t) => {
     const res = await build().inject({
@@ -144,5 +154,62 @@ module.exports = async function (t, etagOpts, hashFn) {
     t.assert.deepStrictEqual(res.body, '')
     t.assert.deepStrictEqual(res.headers['content-length'], undefined)
     t.assert.deepStrictEqual(res.headers.etag, 'W/' + hash)
+  })
+
+  await t.test('returns an etag trailer for each request when trailer is in opts', async (t) => {
+    const res = await build({ trailer: true }).inject({
+      url: '/'
+    })
+
+    t.assert.deepStrictEqual(JSON.parse(res.body), { hello: 'world' })
+    t.assert.deepStrictEqual(res.headers.etag, undefined)
+    t.assert.deepStrictEqual(res.headers.trailer, 'etag')
+    t.assert.deepStrictEqual(res.trailers.etag, hash)
+  })
+
+  await t.test('generates etag trailers for streams when trailer is in opts', async (t) => {
+    const res = await build({ trailer: true }).inject({
+      url: '/stream'
+    })
+
+    t.assert.deepStrictEqual(res.statusCode, 200)
+    t.assert.deepStrictEqual(res.headers.etag, undefined)
+    t.assert.deepStrictEqual(res.headers.trailer, 'etag')
+    t.assert.deepStrictEqual(res.trailers.etag, streamHash)
+  })
+
+  await t.test('returns a 304 if etag matches when trailer is in opts', async (t) => {
+    const res = await build({ trailer: true }).inject({
+      url: '/',
+      headers: {
+        'If-None-Match': hash
+      }
+    })
+
+    t.assert.deepStrictEqual(res.statusCode, 304)
+    t.assert.deepStrictEqual(res.body, '')
+    t.assert.deepStrictEqual(res.headers.etag, hash)
+    t.assert.deepStrictEqual(res.headers.trailer, undefined)
+    t.assert.deepStrictEqual(res.headers['content-length'], undefined)
+  })
+
+  await t.test('returns an already existing etag trailer', async (t) => {
+    const res = await build({ trailer: true }).inject({
+      url: '/etag-trailer'
+    })
+
+    t.assert.deepStrictEqual(res.statusCode, 200)
+    t.assert.deepStrictEqual(res.headers.trailer, 'etag')
+    t.assert.deepStrictEqual(res.trailers.etag, '"custom-trailer"')
+  })
+
+  await t.test('does not generate etag trailer for empty payloads', async (t) => {
+    const res = await build({ trailer: true }).inject({
+      url: '/empty'
+    })
+
+    t.assert.deepStrictEqual(res.statusCode, 204)
+    t.assert.deepStrictEqual(res.headers.etag, undefined)
+    t.assert.deepStrictEqual(res.headers.trailer, undefined)
   })
 }

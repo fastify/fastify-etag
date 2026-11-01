@@ -8,6 +8,7 @@ declare namespace fastifyEtag {
     hashFn?: (payload: string) => string
     weak?: boolean;
     replyWith304?: boolean;
+    trailer?: boolean;
   }
 
   export const fastifyEtag: FastifyEtag
