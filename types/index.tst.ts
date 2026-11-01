@@ -13,5 +13,8 @@ app.register(fastifyEtag, { algorithm: 'sha256' })
 app.register(fastifyEtag, { algorithm: 'fnv1a' })
 app.register(fastifyEtag, { hashFn: () => '' })
 app.register(fastifyEtag, { hashFn: fnv1a })
+app.register(fastifyEtag, { trailer: true })
+app.register(fastifyEtag, { trailer: false })
 
 expect<FastifyEtagOptions>().type.not.toBeAssignableFrom({ weak: 1 })
+expect<FastifyEtagOptions>().type.not.toBeAssignableFrom({ trailer: 1 })
