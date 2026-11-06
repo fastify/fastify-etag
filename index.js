@@ -73,12 +73,43 @@ async function fastifyEtag (app, { algorithm, hashFn, weak, replyWith304 = true 
       reply.header('etag', etag)
     }
 
-    if (replyWith304 && (req.headers['if-none-match'] === etag || req.headers['if-none-match'] === 'W/' + etag || 'W/' + req.headers['if-none-match'] === etag)) {
+    if (replyWith304 && isFresh(req, reply, etag)) {
       reply.code(304)
       newPayload = null
     }
     done(null, newPayload)
   })
+}
+
+// Same conditions as Express' `req.fresh`: only GET and HEAD requests with a
+// 2xx (or 304) response are answered with a 304, and If-None-Match is a list
+// of entity tags compared with the weak comparison function (RFC 9110 13.1.2)
+function isFresh (req, reply, etag) {
+  const ifNoneMatch = req.headers['if-none-match']
+  if (!ifNoneMatch || (req.method !== 'GET' && req.method !== 'HEAD')) {
+    return false
+  }
+
+  const status = reply.statusCode
+  if ((status < 200 || status >= 300) && status !== 304) {
+    return false
+  }
+
+  if (ifNoneMatch.trim() === '*') {
+    return true
+  }
+
+  const opaqueTag = stripWeak(etag)
+  for (const tag of ifNoneMatch.split(',')) {
+    if (stripWeak(tag.trim()) === opaqueTag) {
+      return true
+    }
+  }
+  return false
+}
+
+function stripWeak (tag) {
+  return tag.startsWith('W/') ? tag.slice(2) : tag
 }
 
 module.exports = fp(fastifyEtag, {
